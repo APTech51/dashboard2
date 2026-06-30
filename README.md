@@ -103,6 +103,6 @@ db_1.sql
 
 ## Pengembang
 
-Nama : (Isi nama kamu)
+Nama : Kelompok 3 Kelas RO Prodi Teknik Informatika
 
-Project : Sistem Informasi Persediaan Barang
+Project : Sistem Manajemen Persediaan Barang Dan Transaksi Penjualan Pada Toko Butik MadeTirami
