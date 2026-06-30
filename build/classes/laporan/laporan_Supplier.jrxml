@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+    http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="laporan_supplier"
+    language="groovy"
+    pageWidth="595"
+    pageHeight="842"
+    columnWidth="555"
+    leftMargin="20"
+    rightMargin="20"
+    topMargin="20"
+    bottomMargin="20">
+
+    <queryString language="SQL">
+        <![CDATA[
+        SELECT KD_Supp, Nama_Supp, Alamat, NoTelp, Email
+        FROM supplier
+        ORDER BY KD_Supp ASC
+        ]]>
+    </queryString>
+
+    <field name="KD_Supp" class="java.lang.String"/>
+    <field name="Nama_Supp" class="java.lang.String"/>
+    <field name="Alamat" class="java.lang.String"/>
+    <field name="NoTelp" class="java.lang.String"/>
+    <field name="Email" class="java.lang.String"/>
+
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+
+    <title>
+        <band height="70">
+            <staticText>
+                <reportElement x="0" y="5" width="555" height="35"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[LAPORAN DATA SUPPLIER]]></text>
+            </staticText>
+
+            <line>
+                <reportElement x="0" y="48" width="555" height="1"/>
+            </line>
+        </band>
+    </title>
+
+    <pageHeader>
+        <band height="5"/>
+    </pageHeader>
+
+    <columnHeader>
+        <band height="30">
+
+            <staticText>
+                <reportElement mode="Opaque" x="0" y="0" width="40" height="30"
+                    backcolor="#2E4057" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[No]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement mode="Opaque" x="40" y="0" width="80" height="30"
+                    backcolor="#2E4057" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Kode]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement mode="Opaque" x="120" y="0" width="150" height="30"
+                    backcolor="#2E4057" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Nama Supplier]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement mode="Opaque" x="270" y="0" width="120" height="30"
+                    backcolor="#2E4057" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Alamat]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement mode="Opaque" x="390" y="0" width="80" height="30"
+                    backcolor="#2E4057" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[No. Telp]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement mode="Opaque" x="470" y="0" width="85" height="30"
+                    backcolor="#2E4057" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Email]]></text>
+            </staticText>
+
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="25">
+
+            <textField>
+                <reportElement x="0" y="0" width="40" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="40" y="0" width="80" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{KD_Supp}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="120" y="0" width="150" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{Nama_Supp}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="270" y="0" width="120" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{Alamat}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="390" y="0" width="80" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{NoTelp}]]></textFieldExpression>
+            </textField>
+
+            <textField isBlankWhenNull="true">
+                <reportElement x="470" y="0" width="85" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{Email}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </detail>
+
+    <columnFooter>
+        <band height="5"/>
+    </columnFooter>
+
+    <pageFooter>
+        <band height="30">
+
+            <line>
+                <reportElement x="0" y="0" width="555" height="1"/>
+            </line>
+
+            <textField>
+                <reportElement x="0" y="5" width="280" height="20"/>
+                <textFieldExpression><![CDATA["Dicetak pada: " + new java.util.Date()]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="280" y="5" width="275" height="20"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </pageFooter>
+
+    <summary>
+        <band height="40">
+
+            <staticText>
+                <reportElement x="0" y="10" width="120" height="20"/>
+                <textElement>
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Total Supplier:]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement x="120" y="10" width="100" height="20"/>
+                <textElement>
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{REPORT_COUNT} + " supplier"]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </summary>
+
+</jasperReport>

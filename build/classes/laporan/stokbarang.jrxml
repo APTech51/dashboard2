@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="stokbarang" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b4d56f9b-3988-4704-a927-549aa6dfd134">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+        b.kd_brg AS id_bmg,
+        b.nm_brg AS n_bmg,
+        brg.ukuran AS ukuran, /* PERBAIKAN: Mengambil ukuran asli (M, L, XL) dari tabel barang */
+        brg.Ktgrbrng AS ktgbrg, /* PERBAIKAN: Mengambil kategori asli dari tabel barang */
+        brg.warna AS warna,    /* PERBAIKAN: Mengambil warna asli dari tabel barang */
+        (COALESCE(m.total_masuk, 0) - COALESCE(k.total_keluar, 0)) AS jmlh
+    FROM 
+        (SELECT DISTINCT kd_brg, nm_brg FROM ts_brg_msk) b
+        LEFT JOIN barang brg ON b.kd_brg = brg.kd_brng /* Relasi ke tabel master barang */
+        LEFT JOIN (SELECT kd_brg, SUM(CAST(jumlah AS UNSIGNED)) AS total_masuk FROM ts_brg_msk GROUP BY kd_brg) m ON b.kd_brg = m.kd_brg
+        LEFT JOIN (SELECT kd_brg, SUM(CAST(jm_keluar AS UNSIGNED)) AS total_keluar FROM ts_brg_klr GROUP BY kd_brg) k ON b.kd_brg = k.kd_brg]]>
+	</queryString>
+	<field name="id_bmg" class="java.lang.String"/>
+	<field name="ktgbrg" class="java.lang.String"/>
+	<field name="n_bmg" class="java.lang.String"/>
+	<field name="ukuran" class="java.lang.String"/>
+	<field name="warna" class="java.lang.String"/>
+	<field name="jmlh" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6047afda-1682-4403-ba11-54864fe2c3e8" x="0" y="10" width="555" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN STOK BARANG]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="10" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f85e5d48-93eb-4cf3-a8e5-9b383b9e693a" x="170" y="0" width="130" height="30" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fde827ba-d21c-45a1-bdf4-7598543f30e9" x="300" y="0" width="75" height="30" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ukuran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3b5543d6-affe-4b16-b9e2-e936619bc660" x="375" y="0" width="90" height="30" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Warna]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c4330fb8-eff9-4b71-b4eb-6c5436ed8179" x="465" y="0" width="90" height="30" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stok]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b63594cf-837f-411d-a903-bc786df77072" x="0" y="0" width="80" height="30" backcolor="#CCCCCC">
+					<property name="net.sf.jasperreports.export.xls.auto.fit.column" value="true"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kode Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7799b99c-d824-472a-81ae-82b92e56529b" x="80" y="0" width="90" height="30" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kategori]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="a7a40d2d-f784-4eda-bf0c-adc34740af46" x="0" y="0" width="80" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id_bmg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1e85468d-d918-434f-9728-e81259744d27" x="80" y="0" width="90" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ktgbrg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b02f9cb3-a8ca-477c-b2f4-83ce5f553652" x="170" y="0" width="130" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{n_bmg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f5083b5a-b714-4170-a26f-86e59c80910a" x="300" y="0" width="75" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ukuran}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="61384ea5-f502-4a79-9a8a-18d9dd8be3d7" x="375" y="0" width="90" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{warna}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c680f995-f1ef-4ae4-adf1-0234a1ebbd57" x="465" y="0" width="90" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{jmlh}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement uuid="6cba4a2c-2d57-4dc4-93a3-fc3c26ff095f" x="0" y="5" width="555" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="10" splitType="Stretch"/>
+	</summary>
+</jasperReport>

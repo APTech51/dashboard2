@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laporan_Karyawan" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="efffbe53-0fa1-4845-899f-7da2b6c4ec0e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT id_petugas, nama_petugas, jabatan, no_telepon
+        FROM db_petugas
+        ORDER BY id_petugas ASC]]>
+	</queryString>
+	<field name="id_petugas" class="java.lang.String"/>
+	<field name="nama_petugas" class="java.lang.String"/>
+	<field name="jabatan" class="java.lang.String"/>
+	<field name="no_telepon" class="java.lang.String"/>
+	<title>
+		<band height="70">
+			<staticText>
+				<reportElement uuid="23dd0a4d-4ede-4297-b245-36571a258d69" x="0" y="10" width="555" height="30"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN DATA KARYAWAN]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="80f06d5c-c21d-4d12-b70a-6e5940734f43" x="0" y="50" width="555" height="1"/>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30">
+			<staticText>
+				<reportElement uuid="30ef2d58-f47c-4a3b-87fb-0faf274d788c" mode="Opaque" x="0" y="0" width="40" height="30" forecolor="#FFFFFF" backcolor="#2E4057"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="828ccf30-6ab7-4ca9-bf41-43d000bafb7c" mode="Opaque" x="40" y="0" width="90" height="30" forecolor="#FFFFFF" backcolor="#2E4057"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="46d14b3b-5880-4a41-b089-1c283b5b1ac3" mode="Opaque" x="130" y="0" width="180" height="30" forecolor="#FFFFFF" backcolor="#2E4057"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Karyawan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a5bdfc95-1e54-4412-8d30-e7201749af97" mode="Opaque" x="310" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#2E4057"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jabatan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3493294c-fd69-40b5-bf27-b739beeb92ec" mode="Opaque" x="410" y="0" width="145" height="30" forecolor="#FFFFFF" backcolor="#2E4057"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No Telepon]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<textField>
+				<reportElement uuid="3f308e04-504c-47d8-84c7-fe1c3b77be94" x="0" y="0" width="40" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b48af73-5337-48b2-98ec-8889718b5c9e" x="40" y="0" width="90" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id_petugas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22e975f3-1969-441f-a6c4-2e04c67dd1bd" x="130" y="0" width="180" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_petugas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cd6639f4-8660-47dd-9602-acec2790b267" x="310" y="0" width="100" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{jabatan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fcbf529e-58d5-4a09-a5e1-5aeda73a9222" x="410" y="0" width="145" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{no_telepon}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30">
+			<line>
+				<reportElement uuid="27a26a1a-fbfd-4e09-becd-f8339a36e72d" x="0" y="0" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="559fc540-5879-4956-b320-6b188303463a" x="0" y="5" width="280" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dicetak : " + new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ec777a52-a4ac-4a18-833d-bea268c531b0" x="280" y="5" width="275" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="35">
+			<staticText>
+				<reportElement uuid="3b0ffdb5-0cea-482f-b8ba-ed771e63a595" x="0" y="10" width="120" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Karyawan :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="97d1ae1d-5b3c-4da3-956b-73bdeb7d56fe" x="120" y="10" width="120" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT} + " orang"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
